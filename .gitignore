@@ -1,0 +1,29 @@
+﻿
+[Dd]ebug
+/TEMP
+[Rr]elease
+/ipch
+*.opensdf
+*.sdf
+*.suo
+*.hps
+*.hvs
+bin/
+obj/
+.vs
+
+# NuGet Packages Directory
+packages/
+## TODO: If the tool you use requires repositories.config uncomment the next line
+#!packages/repositories.config
+*.user
+*.aps
+*.vspx
+*.diagsession
+*.opendb
+/*.dll
+*.wbk
+*.db
+*.cso
+/x64
+*.bak

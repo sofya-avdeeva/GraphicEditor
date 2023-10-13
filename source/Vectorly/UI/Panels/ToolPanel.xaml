@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Vectorly.UI.ToolPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:ui="clr-namespace:Vectorly.UI">
+
+    <UserControl.Resources>
+        <ui:IntToModeConverter x:Key="IntToModeConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Column="0">
+            <MenuItem x:Name="Menu" Header="{materialDesign:PackIcon Kind=Menu,Size=27}" Width="Auto" Height="58" Padding="10" ToolTip="Menu" Cursor="Hand">
+                <MenuItem Header="Open" InputGestureText="Ctrl + O" Icon="{materialDesign:PackIcon Kind=FileOutline}" Cursor="Hand" Command="{Binding Open}"/>
+                <Separator />
+                <MenuItem Header="Save" Command="{Binding Save}" Icon="{materialDesign:PackIcon Kind=ContentSaveOutline}" InputGestureText="Ctrl + S" Cursor="Hand"/>
+                <MenuItem Header="Export" Icon="{materialDesign:PackIcon Kind=FileMoveOutline}" Cursor="Hand">
+                    <MenuItem Header="SVG" Command="{Binding SaveToSVG}" Cursor="Hand"/>
+                    <MenuItem Header="EMF" Command="{Binding SaveToEMF}" IsEnabled="False" Cursor="Hand"/>
+                    <MenuItem Header="EPS" Command="{Binding SaveToEPS}" IsEnabled="False" Cursor="Hand"/>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Exit" Command="{Binding Exit}" InputGestureText="Ctrl + E" Icon="{materialDesign:PackIcon Kind=ExitToApp}" Cursor="Hand"/>
+                <MenuItem Header="Exit without save" Command="{Binding ExitWithoutSave}" Icon="{materialDesign:PackIcon Kind=ExitRun}" Cursor="Hand"/>
+            </MenuItem>
+        </Menu>
+
+        <ToolBarTray Grid.Column="1" >
+            <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ToolBarTray.IsLocked="True">
+
+                <Button ToolTip="Undo  Ctrl + Z" Content="{materialDesign:PackIcon Kind=Undo}" Margin="-3,0,0,0" Width="56" Height="57" Foreground="#8d8d8d" Cursor="Hand" />
+                <Button ToolTip="Redo  Ctrl + Y" Content="{materialDesign:PackIcon Kind=Redo}" Foreground="#8d8d8d" Width="56" Height="57" Cursor="Hand"/>
+
+                <Separator />
+
+                <ListBox SelectedIndex ="{Binding CurrentMode, Mode=TwoWay, Converter={StaticResource IntToModeConverter}}" SelectionChanged="ListBox_SelectionChanged">
+                    <ListBoxItem Cursor="Hand" ToolTip="Selection  S">
+                        <materialDesign:PackIcon Kind="NavigationOutline"/>
+                    </ListBoxItem>
+                    <ListBoxItem Cursor="Hand" ToolTip="Rectangle  R">
+                        <materialDesign:PackIcon Kind="SquareOutline"/>
+                    </ListBoxItem>
+                    <ListBoxItem Cursor="Hand" ToolTip="Line  L">
+                        <Line X1="0" X2="16" Y1="0" Y2="16" StrokeThickness="2" Stroke="#d6d6d6"/>
+                    </ListBoxItem>
+                    <ListBoxItem Cursor="Hand" ToolTip="Ellipse  E">
+                        <materialDesign:PackIcon Kind="CircleOutline"/>
+                    </ListBoxItem>
+                    <ListBoxItem Cursor="Hand" ToolTip="Triangle  T">
+                        <materialDesign:PackIcon Kind="TriangleOutline"/>
+                    </ListBoxItem>
+                    <ListBoxItem Cursor="Hand" ToolTip="Pencil  P">
+                        <materialDesign:PackIcon Kind="LeadPencil"/>
+                    </ListBoxItem>
+
+                </ListBox>
+            </ToolBar>
+        </ToolBarTray>
+    </Grid>
+</UserControl>
